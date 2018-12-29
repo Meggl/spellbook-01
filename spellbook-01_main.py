@@ -1,17 +1,17 @@
-import Spellbook03_character
+import spellbook-01_character
 def main():
-    Spellbook03_character.IntEx()
-    nameList, characterCount = Spellbook03_character.ReadProfiles()
-    profileChoice = Spellbook03_character.PickProfile(nameList, characterCount)
+    spellbook-01_character.IntEx()
+    nameList, characterCount = spellbook-01_character.ReadProfiles()
+    profileChoice = spellbook-01_character.PickProfile(nameList, characterCount)
     if profileChoice == 0:
-        charInfo = Spellbook03_character.CreateProfile()
-        Spellbook03_character.DisplayCreateProfile(charInfo)
-        counter = Spellbook03_character.AskEditProfile()
+        charInfo = spellbook-01_character.CreateProfile()
+        spellbook-01_character.DisplayCreateProfile(charInfo)
+        counter = spellbook-01_character.AskEditProfile()
         while counter != 0:
-            charInfo = Spellbook03_character.EditProfile(counter, charInfo)
-            Spellbook03_character.DisplayCreateProfile(charInfo)
-            counter = Spellbook03_character.AskEditProfile()
-        Spellbook03_character.SaveClose(charInfo)
+            charInfo = spellbook-01_character.EditProfile(counter, charInfo)
+            spellbook-01_character.DisplayCreateProfile(charInfo)
+            counter = spellbook-01_character.AskEditProfile()
+        spellbook-01_character.SaveClose(charInfo)
 
     else:
         #Go to B

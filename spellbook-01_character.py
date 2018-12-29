@@ -32,7 +32,7 @@ def IntEx():
 # |A2|display the pre-existing character profile names
 def  ReadProfiles():
     # |a2.1| Create empty lists to put the data of like type with each other (in order, of course)
-    meg_characters = open('meg_characters.txt', 'r')
+    sb-01_character = open('sb-01_character.txt', 'r')
 
     nameList = []
 
@@ -43,7 +43,7 @@ def  ReadProfiles():
     tableContents = [0]
 
 	# |a2.4| create a 'list' that holds each line of the whole text document.
-    content = meg_characters.readlines()
+    content = sb-01_character.readlines()
 
 	# |a2.5| Every time there is a sparator line the character Count will go up one, the particular number that the separator line is on will be marked under 'tableContents', and the following lines will be recorded in their respected lists.
     for line in range(len(content)):
@@ -62,7 +62,7 @@ def  ReadProfiles():
             pass
 
 	# |a2.6| Close document
-    meg_characters.close()
+    sb-01_character.close()
 
 	# |a2.7| Return the lists, the tableContents, and the profile count.
     return nameList, characterCount
@@ -206,8 +206,8 @@ def EditProfile(counter, charInfo):
     return charInfo
 
 def SaveClose(charInfo):
-    meg_characters = open('meg_characters.txt', 'a')
-    meg_characters.write('--------------------\n')
+    sb-01_character = open('sb-01_character.txt', 'a')
+    sb-01_character.write('--------------------\n')
     for counter in range(len(charInfo)):
         if counter == 0:
             pass
@@ -216,9 +216,9 @@ def SaveClose(charInfo):
             variable = str(charInfo[counter])
             # str(variable)
             variable += "\n"
-            meg_characters.write(variable)
-    meg_characters.write("")
-    meg_characters.close()
+            sb-01_character.write(variable)
+    sb-01_character.write("")
+    sb-01_character.close()
     print("Thank you.\n\nInformation was saved!")
 
 # |D| CONFIRM ITEMS |D|
