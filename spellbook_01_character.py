@@ -4,10 +4,6 @@
 
 """
 def CharProfileData():
-    chDataName = ["NAME", "string", 1, "Name: ", "Your character's full name: "] # Fix
-    chDataLevel = ["LEVEL", "int", 1, "Level: ", ""] # fix`
-    chDataAS = ["ABILITY SCORES", "int", 6,""] # fix
-
 
     # name of data Group (ex: Ability Scores)
     # supposed data type for group
@@ -15,10 +11,10 @@ def CharProfileData():
     # Prompt (instructions) for input of data points
     # Name of data point
 
-
-
     # number of points of all data
 
+
+    #
 
 """
 
@@ -32,7 +28,7 @@ def IntEx():
 # |A2|display the pre-existing character profile names
 def  ReadProfiles():
     # |a2.1| Create empty lists to put the data of like type with each other (in order, of course)
-    sb-01_character = open('sb-01_character.txt', 'r')
+    sb-01_character = open('sb_01_character.txt', 'r')
 
     nameList = []
 
@@ -206,7 +202,7 @@ def EditProfile(counter, charInfo):
     return charInfo
 
 def SaveClose(charInfo):
-    sb-01_character = open('sb-01_character.txt', 'a')
+    sb-01_character = open('sb_01_character.txt', 'a')
     sb-01_character.write('--------------------\n')
     for counter in range(len(charInfo)):
         if counter == 0:
