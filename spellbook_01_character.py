@@ -1,5 +1,6 @@
 # This program is meant to allow users to open a pre-existing character profile or create and save a new character profile.
 
+# if user types in 1000 as the character profile number, they can edit the kinds of information that is saved.
 
 
 """
@@ -30,11 +31,16 @@ def  ReadProfiles():
     # |a2.1| Create empty lists to put the data of like type with each other (in order, of course)
     sb-01_character = open('sb_01_character.txt', 'r')
 
+    chDataGnameList = []
+    chDataGtypeList = []
+
     nameList = []
 
+    infoCount = 0
     # |a2.2| create a counter that keeps track of how many character profiles there are
     characterCount = 0
 
+    infoContents = [0]
 	# |a2.3| create a list that notes the line number that starts each profile
     tableContents = [0]
 
@@ -42,6 +48,16 @@ def  ReadProfiles():
     content = sb-01_character.readlines()
 
 	# |a2.5| Every time there is a sparator line the character Count will go up one, the particular number that the separator line is on will be marked under 'tableContents', and the following lines will be recorded in their respected lists.
+    for line in range(len(content)):
+        if content[line] == '~~~~~~~~~~\n':
+            infoCount += 1
+            int(line)
+            infoContents.append(line)
+            chDataGnameList.append(content[line+1])
+            chDataGtypeList.append(content[line+2])
+        else:
+            pass
+
     for line in range(len(content)):
         if content[line] == '--------------------\n':
 
@@ -84,8 +100,13 @@ def PickProfile(nameList, characterCount):
             again = input("Please type a valid digit to select the profile of your choosing.\nHit 'enter' to continue.")
             continue
         else:
+            # HIDDEN OPTION: character profile saved information
+            if profileChoice == 1000:
+                print("You are now in the Character Profile Save-Data Editor.")
+                # Function goes here
+                break
 			# VALIDATION range
-            if profileChoice < 0 or profileChoice > characterCount:
+            elif profileChoice < 0 or profileChoice > characterCount:
                 again = input("Please type a valid digit to select the profile of your choosing.\nHit 'enter' to continue.")
                 continue
             else:
@@ -97,7 +118,6 @@ def PickProfile(nameList, characterCount):
 
 # |B| SELECT PRE-EXISTING PROFILE |B|
     # display deadend ~Terminate Program~
-
 
 
 # |C| CREATE NEW PROFILE |C|
