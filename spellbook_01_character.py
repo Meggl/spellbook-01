@@ -1,94 +1,87 @@
-# This program is meant to allow users to open a pre-existing character profile or create and save a new character profile.
-
-# if user types in 1000 as the character profile number, they can edit the kinds of information that is saved.
-
-
-"""
-def CharProfileData():
-
-    # name of data Group (ex: Ability Scores)
-    # supposed data type for group
-    # number of different data points in a group
-    # Prompt (instructions) for input of data points
-    # Name of data point
-
-    # number of points of all data
-
-
-    #
-
-"""
-
-# |A| MAIN WINDOW |A|
-# |A1| describe what the program is !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#Introductory Exposition
 def IntEx():
     print("This program is meant to allow you to open a pre-existing character profile or create and save a new character profile.")
     print("These are the character profiles you can choose from.")
 
 
-# |A2|display the pre-existing character profile names
-def  ReadProfiles():
-    # |a2.1| Create empty lists to put the data of like type with each other (in order, of course)
+#=====================================================
+#Read the file > Look for profile names
+#Read the file > Look for metadata names
+def  ReadFile():
+#=====================================================
+
+    #Open the 'sb_01_character.txt' file (sb_01_character)
     sb-01_character = open('sb_01_character.txt', 'r')
 
-    chDataGnameList = []
-    chDataGtypeList = []
-
+    #Create an empty list for the character profile Names (nameList)
     nameList = []
+    #Create two empty lists for the metadata (group) names and for the metadata (group) types.(cd_gNameList and cd_gTypeList)
+    cd_gNameList = []
+    cd_gTypeList = []
 
-    infoCount = 0
-    # |a2.2| create a counter that keeps track of how many character profiles there are
-    characterCount = 0
+    #Create a counter variable that keeps track of how many character profiles there are in the file. (charCount)
+    charCount = 0
+    #Create a counter variable that keeps track of how many kinds of metadata there are in the file. (cd_metaCount)
+    cd_metaCount = 0
 
-    infoContents = [0]
-	# |a2.3| create a list that notes the line number that starts each profile
-    tableContents = [0]
+    #Create a list, initiated with the integer 0 in the element 0, that will keep a record of the lines in the text document that are utilized to mark the start of a profile's data. (chBookmark)
+    chBookmark = [0]
+    #Create a list, initiated with the integer 0 in the element 0, that will keep a record of the lines in the text document that are utilized to mark the start of a kind of metadata's data. (mdBookmark)
+    mdBookmark = [0]
 
-	# |a2.4| create a 'list' that holds each line of the whole text document.
-    content = sb-01_character.readlines()
+    #Create a 'list' that holds each line of the whole text document using the readlines() function. (content)
+    content = sb_01_character.readlines()
 
-	# |a2.5| Every time there is a sparator line the character Count will go up one, the particular number that the separator line is on will be marked under 'tableContents', and the following lines will be recorded in their respected lists.
+    #Use a loop that will, for the range of the length of the list 'content', check for the 'separator line' of the metadata, and for the 'separator line' of the character profiles:
     for line in range(len(content)):
+        #if a metadata 'separator line' is found:
         if content[line] == '~~~~~~~~~~\n':
-            infoCount += 1
+            #a. add 1 to the metadata count (cd_metaCount)
+            cd_metaCount += 1
+            #b. make the current 'line' counter an integer
             int(line)
-            infoContents.append(line)
-            chDataGnameList.append(content[line+1])
-            chDataGtypeList.append(content[line+2])
+            #c. append the integer 'line' to the mdBookmark list
+            mdBookmark.append(line)
+            #d. append  the integer 'line' + 1 to the cd_gNameList ('+1' because the name data is one line after the 'separator line'.)
+            cd_gNameList.append(content[line+1])
+            #e. append  the integer 'line' + 2 to the cd_gTypeList ('+2' because the name data is two lines after the 'separator line'.)
+            cd_gTypeList.append(content[line+2])
         else:
             pass
 
     for line in range(len(content)):
         if content[line] == '--------------------\n':
-
-			# |a2.5.1| the character Count will go up one
-            characterCount += 1
-
-			# |a2.5.2| the particular number that the separator line is on will be marked under 'tableContents'
+            #a. add 1 to the character profile count (charCount)
+            charCount += 1
+            #b. make the current 'line' counter an integer
             int(line)
-            tableContents.append(line)
-
-			# |a2.5.3| the following lines will be recorded in their respected lists.
+            #c. append the integer 'line' to the chBookmark list
+            chBookmark.append(line)
+            #d. append  the integer 'line' + 1 to the nameList ('+1' because the name data is one line after the 'separator line'.)
             nameList.append(content[line+1])
         else:
             pass
 
-	# |a2.6| Close document
-    sb-01_character.close()
+	#close the 'sb_01_character.txt' file.
+    sb_01_character.close()
 
-	# |a2.7| Return the lists, the tableContents, and the profile count.
+	#return nameList, charCount, cd_gNameList, cd_gTypeList, cd_metaCount.
     return nameList, characterCount, chDataGnameList, chDataGtypeList, infoCount
 
-#|A3| *bc* Display the pre-existing character profiles and ]prompt the user to either select a pre-exising profile or create a new profile, and retrieve that input.
+
+
+#=====================================================
+#Display the profile names > ask for input
 def PickProfile(nameList, characterCount):
-	# |a3.1| Display the profiles that the user can choose from. [right now, choosing an already-made profile will lead to a temporary DEAD END]
+#=====================================================
+
+
     print("These are the profiles you may choose from:\n")
     print("``````````````````````````````````````````````````````\n")
-    print("0. [Create New Character Profile]\n\n")
+    print("0.  [Create New Character Profile]\n\n")
     for character in range(characterCount):
-        print(character+1, ".", nameList[character], sep = "")
-        print("\n")
-        print("``````````````````````````````````````````````````````\n")
+        print(character+1, ". ", nameList[character], "\n",sep = "")
+    print("``````````````````````````````````````````````````````\n")
 
 	# |a3.2| <Validation Loop> ask the user to select a profile or to create a new one
     while True:
@@ -102,8 +95,6 @@ def PickProfile(nameList, characterCount):
         else:
             # HIDDEN OPTION: character profile saved information
             if profileChoice == 1000:
-                print("You are now in the Character Profile Save-Data Editor.")
-                # Function goes here
                 break
 			# VALIDATION range
             elif profileChoice < 0 or profileChoice > characterCount:
@@ -236,14 +227,3 @@ def SaveClose(charInfo):
     sb-01_character.write("")
     sb-01_character.close()
     print("Thank you.\n\nInformation was saved!")
-
-# |D| CONFIRM ITEMS |D|
-    # write the data into the text file
-    # display to the user that the information was saved ~Terminate Program~
-
-# |E| EDIT AN ITEM |E|
-    # retrieve the user's character's data (One item) (using item's funciton)
-    # display the user's character's data (All items)
-    # |de|prompt the user to either edit an item or confirm all the items |de|
-
-# NOTE: For C, we are collecting the data through a list and 'for' loop, then when we go down to E, that's when we'll use the functions.

@@ -1,7 +1,7 @@
 import spellbook_01_character
 def main():
     spellbook_01_character.IntEx()
-    nameList, characterCount, chDataGnameList, chDataGtypeList, infoCount = spellbook_01_character.ReadProfiles()
+    nameList, characterCount, chDataGnameList, chDataGtypeList, infoCount = spellbook_01_character.ReadFile()
     profileChoice = spellbook_01_character.PickProfile(nameList, characterCount)
     if profileChoice == 0:
         charInfo = spellbook_01_character.CreateProfile()
