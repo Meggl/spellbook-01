@@ -77,7 +77,7 @@ def  ReadProfiles():
     sb-01_character.close()
 
 	# |a2.7| Return the lists, the tableContents, and the profile count.
-    return nameList, characterCount
+    return nameList, characterCount, chDataGnameList, chDataGtypeList, infoCount
 
 #|A3| *bc* Display the pre-existing character profiles and ]prompt the user to either select a pre-exising profile or create a new profile, and retrieve that input.
 def PickProfile(nameList, characterCount):
